@@ -1,0 +1,11 @@
+body{
+	background-image: url("../images/tracks.jpg");
+}
+
+.panel-heading{
+	background-color: black!important;
+}
+
+.panel-primary{
+	border: 1px solid black!important;
+}

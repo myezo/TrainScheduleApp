@@ -9,11 +9,11 @@ var config = {
   firebase.initializeApp(config);
   var database = firebase.database();
 
-  /*var train = "";
-  var destination = "";
-  var frequency = "";
-  var time = "";
-  var minutes = "";*/
+
+  var dt = new Date();
+  var daySeconds = dt.getSeconds() + (60 * (dt.getMinutes() + (60 * dt.getHours())));
+  //console.log(daySeconds);
+  console.log(dt);
 
 
   $("#addTrain").on("click", function() {
@@ -47,6 +47,7 @@ var config = {
   });
 
 
+
   database.ref().on("child_added", function(childSnapshot){
     console.log(childSnapshot.val());
 
@@ -60,10 +61,15 @@ var config = {
     console.log(time);
     console.log(frequency);
 
+
     $("#train-table > tbody").append(
       "<tr><td>" + train + 
       "</td><td>" + destination +
        "</td><td>" + frequency + 
        "</td><td>" + moment(time, "HH:mm").format('hh:mm A') + 
        "</td></tr>");
+
+    var militaryTime = moment(time, "HH:mm").format('hh:mm A');
+    //var trainSeconds = moment(time, "HH:mm").seconds();
+    console.log(militaryTime);
   });
