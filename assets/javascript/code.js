@@ -12,8 +12,7 @@ var config = {
 
   var dt = new Date();
   var daySeconds = dt.getSeconds() + (60 * (dt.getMinutes() + (60 * dt.getHours())));
-  //console.log(daySeconds);
-  console.log(dt);
+  console.log(daySeconds);
 
 
   $("#addTrain").on("click", function() {
@@ -61,15 +60,19 @@ var config = {
     console.log(time);
     console.log(frequency);
 
+    var trainInSecs =moment(time, "HH:mm");
+    trainInSecs = ((trainInSecs._d.valueOf()/ 1000 ) % 86400);
+    var secsToTrain = trainInSecs - daySeconds;
+    var minsToTrain = secsToTrain /60;
+    console.log(minsToTrain);
+    var minutes = parseInt(minsToTrain);
+
 
     $("#train-table > tbody").append(
       "<tr><td>" + train + 
       "</td><td>" + destination +
        "</td><td>" + frequency + 
        "</td><td>" + moment(time, "HH:mm").format('hh:mm A') + 
-       "</td></tr>");
+       "</td><td>" + minutes + "</td></tr>");
 
-    var militaryTime = moment(time, "HH:mm").format('hh:mm A');
-    //var trainSeconds = moment(time, "HH:mm").seconds();
-    console.log(militaryTime);
   });
